@@ -11,7 +11,7 @@ public class LoopByArr {
     }
 
     public void addSine(int sine,int id){
-        arr[Math.floorMod(pepole[id], arr.length)] = sine;
+        arr[Math.floorMod(pepole[id], arr.length)] = sine+arr[Math.floorMod(pepole[id], arr.length)];
     }
 
     public int getSine(int id){
