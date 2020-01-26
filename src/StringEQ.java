@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class StringEQ {
     public static String chack(String a ,String b){
-        int matrix[][] = new int[a.length()][b.length()];
+        int[][] matrix = new int[a.length()][b.length()];
         actionFirst(matrix,a,b);
 
         for (int i =1;i<a.length();i++){
@@ -16,40 +16,32 @@ public class StringEQ {
                 }
             }
         }
-        System.out.println(Arrays.toString(matrix[0]));
-        System.out.println(Arrays.toString(matrix[1]));
-        System.out.println(Arrays.toString(matrix[2]));
-        System.out.println(Arrays.toString(matrix[3]));
-        System.out.println(Arrays.toString(matrix[4]));
-        System.out.println(Arrays.toString(matrix[5]));
-        String temp ="";
+        for (int i =0; i<matrix.length;i++) {
+            System.out.println(Arrays.toString(matrix[i]));
+        }
+
+
+        StringBuilder temp = new StringBuilder();
         int i = a.length()-1, j =b.length()-1;
-        while (i>=0&&j>=0){
-            if(i==0&&j>0){
-                if (a.charAt(i)==b.charAt(j))
-                    temp =a.charAt(i)+temp;
+        int size = matrix[i][j];
+        int count = size;
+        while (i>=0&&j>=0|| count>0){
+//            System.out.println(i+" "+j+" "+count+" " +temp);
+            if (a.charAt(i)==b.charAt(j)){
+                    temp.insert(0, a.charAt(i));
+                    i--;
+                    j--;
+                    count--;
 
             }
-            else if (a.charAt(i)==b.charAt(j)) {
-                temp = a.charAt(i) + temp;
-                i--;
+            else if(j>0&&matrix[i][j]==matrix[i][j-1]){
                 j--;
-            }
-            else if(i>0&&j>0&&matrix[i-1][j]>matrix[i][j-1]){
-                i--;
             }
             else {
-                j--;
-            }
-            if (i==0||j==0){
-                break;
+                i--;
             }
         }
-        while (i>=0&&matrix[i][j]==0){
-            i--;
-        }
-        System.out.println(i);
-        return a.charAt(i)+temp;
+        return temp.toString();
 
     }
 
@@ -75,6 +67,7 @@ public class StringEQ {
 
     }
     public static void main(String[] args){
-        System.out.println(chack("vaxcxxxxvxxsxdxxxmxnxxxjxkxxxxxtx","kakkcvkkkskdkxkkkkmkknjkkkkkt"));
+        System.out.println(chack("xxkxkxkxx","kkkxkkkkkxkkkxk"));
+
     }
 }
