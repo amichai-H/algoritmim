@@ -34,8 +34,24 @@ public class Fibonacci {
         return result[0][0];
 
     }
+    public static double solutionR(int n){
+        if (n==0) return 0;
+        if (n==1||n==2) return 1;
+        int[][] fibBase = {{1,1},{1,0}};
+        int ans[][] = recorciveMat(n-1,fibBase);
+        return ans[0][0];
+    }
+
+    private static int[][] recorciveMat(int n, int[][] fibBase) {
+        int[][] A = {{1,0},{0,1}};
+        if (n==0) return A;
+        if (n%2==0) return recorciveMat(n/2,matricsMult(fibBase,fibBase));
+        return matricsMult(fibBase,recorciveMat((n-1)/2,matricsMult(fibBase,fibBase)));
+    }
+
     public static void main(String[] args){
         System.out.println(solution(8));
+        System.out.println(solutionR(8));
     }
 
 
